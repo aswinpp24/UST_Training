@@ -12,7 +12,7 @@ var MoviesSchema = settings.mongoose.Schema(
         summary: { type: String, required: true },
         language: { type: String, required: true },
         genres: { type: String, enum: ['Drama', 'Science-Fiction', 'Thriller', 'Action', 'Romance'] },
-        details: { runtime: { type: Number, required: true }, rating: { type: Number, required: true } },
+        details: { runtime: { type: Number, required: true }, rating: { type: Number, required: true, min: 1, max: 10 } },
         pictures: { type: [String] },
         currentlyPremiering: { type: Boolean, required: true, default: true }
     }

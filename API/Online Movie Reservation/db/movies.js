@@ -38,3 +38,19 @@ exports.select = function (criteria, callback) {
         callback(err, data)
     })
 }
+
+//retrieve fields based on criteria, pagination and offset
+exports.select = function (criteria, options, callback) {
+
+    // Local variable for capturing limit & offset
+    var lim = 0
+    var off = 0
+    if (options.pagination !== undefined) {
+        if (options.pagination.limit !== undefined) lim = parseInt(options.pagination.limit)
+        if (options.pagination.offset !== undefined) off = parseInt(options.pagination.offset)
+    }
+
+    model.Movies.find(criteria, function (err, data) {
+        callback(err, data)
+    }).select(options.fields).limit(lim).skip(off)
+}
