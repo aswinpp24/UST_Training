@@ -1,0 +1,194 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Movie Reservation
+  description: >-
+    This specification is for online movie reservation. Here you can find
+    information about movies
+  contact:
+    name: Aswin
+    url: 'https://www.movieshub.com'
+    email: admin@movies-hub.com
+  license:
+    name: GNU
+    url: 'https://www.movieshub.com'
+host: api.movieshub.org
+basePath: /v1/
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: movies
+    description: Refer to movies that are premiering
+externalDocs:
+  description: This is an external doc
+  url: 'https://www.developer.movies-hub.com/docs'
+paths:
+  /movies:
+    get:
+      summary: This gets a list of movies
+      description: In this page you can find list of all movies
+      tags:
+        - movies
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Movies'
+        '400':
+          description: When a movie is not found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/GeneralError'
+    post:
+      summary: Add a new movie details to the list
+      description: Adding new movie information
+      tags:
+        - movies
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Movies'
+        '405':
+          description: Invalid Input
+          schema:
+            $ref: '#/definitions/Movies'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/GeneralError'
+  '/movies/{id}':
+    get:
+      summary: This gets the details of movie corresponding to the id
+      description: In this page you can get movie details
+      tags:
+        - movies
+      parameters:
+        - name: id
+          in: path
+          description: ID of Movie
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Movies'
+        '400':
+          description: When a movie is not found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/GeneralError'
+    put:
+      summary: This updates the details of existing movie corresponding to the id
+      description: In this page you can update movie details
+      tags:
+        - movies
+      parameters:
+        - name: id
+          in: path
+          description: ID of Movie
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Movies'
+        '405':
+          description: Invalid Input
+          schema:
+            $ref: '#/definitions/Movies'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/GeneralError'
+    delete:
+      summary: This deletes the details of existing movie corresponding to the id
+      description: In this page you can delete movie details
+      tags:
+        - movies
+      parameters:
+        - name: id
+          in: path
+          description: ID of Movie
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Movies'
+        '400':
+          description: When a movie is not found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/GeneralError'
+definitions:
+  GeneralError:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  NotFoundError:
+    required:
+      - message
+      - hint
+    properties:
+      message:
+        type: string
+      hint:
+        type: string
+  Movies:
+    required:
+      - name
+      - summary
+      - language
+      - currentlyPremiering
+    properties:
+      name:
+        type: string
+      summary:
+        type: string
+      language:
+        type: string
+      genres:
+        type: string
+        description: type of genres
+        enum:
+          - Drama
+          - Science-Fiction
+          - Thriller
+          - Action
+          - Romance
+      details:
+        type: object
+        properties:
+          runtime:
+            type: number
+          rating:
+            type: number
+      pictures:
+        type: array
+        items:
+          type: string
+      currentlyPremiering:
+        type: boolean
