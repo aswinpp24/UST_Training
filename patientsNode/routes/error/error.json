@@ -1,0 +1,64 @@
+{
+	"errors" : [
+		{
+			"messages": [
+				{
+					"code": "WAG_E_INVALID_REQUEST_1001",
+					"message": "Invalid Request. <service specific>",
+					"type": "ERROR"
+				}
+      ],
+      "status": 400
+		},
+		{
+			"messages": [
+				{
+					"code": "WAG_E_UNAUTHORIZED_REQUEST_1001",
+					"message": "Unauthorized request.",
+					"type": "ERROR"
+				}
+			],
+      "status": 401
+		},
+		{
+			"messages": [
+				{
+					"code": "WAG_E_SEARCH_1000",
+					"message": "Patient record not found!!!",
+					"type": "ERROR"
+				}
+			],
+      "status": 404
+		},
+		{
+			"messages": [
+				{
+					"code": "WAG_E_INVALID_METHOD_1001",
+					"message": "Unauthorized request.",
+					"type": "ERROR"
+				}
+			],
+      "status": 405
+		},
+		{
+			"messages": [
+				{
+					"code": "WAG_E_SVC_ERROR_1000",
+					"message": "Sorry! Server is temporarily unavailable. ",
+					"type": "ERROR"
+				}
+			],
+      "status": 503
+		},
+		{
+			"messages": [
+				{
+					"code": "WAG_E_SVC_ERROR_1000",
+					"message": "Sorry! This service is temporarily unavailable. Please try again later.",
+					"type": "ERROR"
+				}
+			],
+      "status": 500
+		}
+	]
+}
